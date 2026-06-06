@@ -1,0 +1,8 @@
+<!-- Copia esto como App.config y cambia los valores -->
+<configuration>
+  <connectionStrings>
+    <add name="MiDB"
+         connectionString="Server=TU_SERVIDOR;Database=TU_BD;Integrated Security=True;"
+         providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+</configuration>
