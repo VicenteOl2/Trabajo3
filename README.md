@@ -1,6 +1,5 @@
 # Trabajo3
 
-# Trabajo3 — Smart Gym
 
 Sistema de gestión de clientes para gimnasio desarrollado en C# WinForms.
 
