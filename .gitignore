@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Connection strings
+Trabajo3/App.config
+Trabajo3.Data/App.config
