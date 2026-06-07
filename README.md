@@ -16,7 +16,7 @@ Sistema de gestión de clientes para gimnasio desarrollado en C# WinForms.
 1. Clona el repositorio
 2. Copia `app.config.example` como `App.config` dentro de `Trabajo3/`
 3. Cambia el connection string por tu servidor local
-4. Compila y ejecuta
-
+4. Compila y ejecuta.
+5. Puedes agregar o crear tu DB
 ## Autor
 Vicente Olmos — [@VicenteOI2](https://github.com/VicenteOI2)
