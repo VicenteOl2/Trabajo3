@@ -66,14 +66,14 @@ namespace Trabajo3
         private Dictionary<string, object> ObtenerDatosFormulario()
         {
             return new Dictionary<string, object>
-    {
-        { "@IdCliente",       txtId.Text },
-        { "@NombreCompleto",  txtNombre.Text },
-        { "@PorcentajeGrasa", txtGrasa.Text },
-        { "@IdRutinaAsignada",        txtRutina.Text },
-        { "@UltimoAcceso",    dtpUltimoAcceso.Value }
-    };
-        }
+                {
+                    { "@IdCliente",txtId.Text },
+                    { "@NombreCompleto",txtNombre.Text },
+                    { "@PorcentajeGrasa",txtGrasa.Text },
+                    { "@IdRutinaAsignada",txtRutina.Text },
+                    { "@UltimoAcceso",dtpUltimoAcceso.Value }
+                };
+                    }
 
         
         private void button2_Click(object sender, EventArgs e)
@@ -86,6 +86,33 @@ namespace Trabajo3
         {
             repo.EjecutarSP("SP_Update", ObtenerDatosFormulario());
             tablas();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return; // evita click en el header
+
+            DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+
+            txtId.Text = fila.Cells["IdCliente"].Value?.ToString();
+            txtNombre.Text = fila.Cells["NombreCompleto"].Value?.ToString();
+            txtGrasa.Text = fila.Cells["PorcentajeGrasa"].Value?.ToString();
+            txtRutina.Text = fila.Cells["IdRutinaAsignada"].Value?.ToString();
+
+            if (DateTime.TryParse(fila.Cells["UltimoAcceso"].Value?.ToString(), out DateTime fecha))
+                dtpUltimoAcceso.Value = fecha;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int idRutina = int.Parse(txtR.Text);
+
+            // Escalar
+            decimal promedio = repo.ObtenerPromedioGrasa(idRutina);
+            lblPromedio.Text = promedio.ToString("F2");
+
+            // Tabla
+            dataGridView4.DataSource = repo.ObtenerClientesPorRutina(idRutina);
         }
     }
 }

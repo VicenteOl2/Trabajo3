@@ -16,7 +16,36 @@ namespace Trabajo3.Data
         private string ConnectionString = ConfigurationManager.ConnectionStrings["MiDB"].ConnectionString;
 
 
+        public decimal ObtenerPromedioGrasa(int idRutina)
+        {
+            using (SqlConnection cn = new SqlConnection(ConnectionString))
+            {
+                cn.Open();
+                string query = "SELECT dbo.fn_ObtenerPromedioGrasa(@IdRutina)";
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@IdRutina", idRutina);
+                    var resultado = cmd.ExecuteScalar();
+                    return resultado != DBNull.Value ? Convert.ToDecimal(resultado) : 0;
+                }
+            }
+        }
 
+        public DataTable ObtenerClientesPorRutina(int idRutina)
+        {
+            using (SqlConnection cn = new SqlConnection(ConnectionString))
+            {
+                cn.Open();
+                string query = "SELECT * FROM dbo.fn_ObtenerClientesPorRutina(@IdRutina)";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, cn))
+                {
+                    adapter.SelectCommand.Parameters.AddWithValue("@IdRutina", idRutina);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    return dt;
+                }
+            }
+        }
         public void EjecutarSP(string nombreSP, Dictionary<string, object> parametros)
         {
             
@@ -26,7 +55,7 @@ namespace Trabajo3.Data
                     using (var cmd = new SqlCommand(nombreSP, cn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        foreach (var par in parametros)
+                        foreach (var par in parametros)//parametros = .key y .value
                         {
                             cmd.Parameters.AddWithValue(par.Key, par.Value ?? DBNull.Value);
                         }
