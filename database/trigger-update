@@ -1,0 +1,88 @@
+USE [Gyms]
+GO
+
+/****** Object:  Trigger [dbo].[TR_Gym_Update]    Script Date: 6/8/2026 3:00:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [dbo].[TR_Gym_Update]
+ON [dbo].[ControlGimnasio]
+AFTER UPDATE
+AS
+BEGIN
+    -- =======================================================
+    -- 1. DECLARACIÓN DE VARIABLES
+    -- =======================================================
+    declare @IdCliente int -- Una sola variable para el ID fijo
+    
+    declare @NombreCompleto_old varchar(150)
+    declare @NombreCompleto_new varchar(150)
+    
+    declare @PorcentajeGrasa_old float
+    declare @PorcentajeGrasa_new float
+    
+    declare @IdRutinaAsignada_old int
+    declare @IdRutinaAsignada_new int
+    
+    declare @UltimoAcceso_old smalldatetime
+    declare @UltimoAcceso_new smalldatetime
+
+    -- Rescatamos el ID directamente de la tabla virtual (es el mismo en inserted y deleted)
+    select @IdCliente = inserted.IdCliente from inserted
+
+
+    -- =======================================================
+    -- 2. COMPROBACIÓN DE CAMBIOS COLUMNA POR COLUMNA
+    -- =======================================================
+    if UPDATE(NombreCompleto)
+    begin
+        select @NombreCompleto_old = deleted.NombreCompleto from deleted
+        select @NombreCompleto_new = inserted.NombreCompleto from inserted
+    end
+
+    if UPDATE(PorcentajeGrasa)
+    begin
+        select @PorcentajeGrasa_old = deleted.PorcentajeGrasa from deleted
+        select @PorcentajeGrasa_new = inserted.PorcentajeGrasa from inserted
+    end
+
+    if UPDATE(IdRutinaAsignada)
+    begin
+        select @IdRutinaAsignada_old = deleted.IdRutinaAsignada from deleted
+        select @IdRutinaAsignada_new = inserted.IdRutinaAsignada from inserted
+    end
+
+    if UPDATE(UltimoAcceso)
+    begin
+        select @UltimoAcceso_old = deleted.UltimoAcceso from deleted
+        select @UltimoAcceso_new = inserted.UltimoAcceso from inserted
+    end
+
+
+    -- =======================================================
+    -- 3. INSERCIÓN EN LA TABLA DE LOGS
+    -- =======================================================
+    insert into Trigger_RegistroControlLog
+    values (
+        @IdCliente, -- Entra el ID único
+        @NombreCompleto_old, 
+        @NombreCompleto_new,
+        @PorcentajeGrasa_old, 
+        @PorcentajeGrasa_new,
+        @IdRutinaAsignada_old, 
+        @IdRutinaAsignada_new,
+        @UltimoAcceso_old, 
+        @UltimoAcceso_new,
+        GETDATE(),     
+        SYSTEM_USER    
+    )
+END;
+GO
+
+ALTER TABLE [dbo].[ControlGimnasio] ENABLE TRIGGER [TR_Gym_Update]
+GO
+
+
