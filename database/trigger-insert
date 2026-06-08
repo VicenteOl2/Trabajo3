@@ -1,0 +1,39 @@
+USE [Gyms]
+GO
+
+/****** Object:  Trigger [dbo].[TR_Gym_Insert]    Script Date: 6/8/2026 2:59:56 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [dbo].[TR_Gym_Insert]
+ON [dbo].[ControlGimnasio]
+AFTER INSERT
+AS
+BEGIN
+    -- =======================================================
+    -- 1. DECLARACIÓN DE VARIABLES (Estilo visto en clases)
+    -- =======================================================
+    declare @IdCliente int
+    declare @IdRutinaAsignada int
+
+    -- =======================================================
+    -- 2. ASIGNACIÓN DIRECTA DESDE LA TABLA VIRTUAL INSERTED
+    -- =======================================================
+    select @IdCliente = inserted.IdCliente from inserted
+    select @IdRutinaAsignada = inserted.IdRutinaAsignada from inserted
+
+    -- =======================================================
+    -- 3. INSERCIÓN AUTOMÁTICA EN TU TABLA2 DE LOGS
+    -- =======================================================
+    insert into RegistroRutinas_Clientes (IdCliente, IdRutinaAsignada, FechaActual, Usuario)
+    values (@IdCliente, @IdRutinaAsignada, GETDATE(), USER_NAME())
+END;
+GO
+
+ALTER TABLE [dbo].[ControlGimnasio] ENABLE TRIGGER [TR_Gym_Insert]
+GO
+
+
