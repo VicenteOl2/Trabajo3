@@ -49,12 +49,13 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.lblPromedio = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtR = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblPromedio = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.DELETE = new System.Windows.Forms.Button();
             this.ControlGimnasio.SuspendLayout();
             this.Registro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -275,6 +276,35 @@
             this.tabPage1.Text = "Funciones";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataGridView4
+            // 
+            this.dataGridView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(0, 86);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(915, 287);
+            this.dataGridView4.TabIndex = 19;
+            // 
+            // lblPromedio
+            // 
+            this.lblPromedio.AutoSize = true;
+            this.lblPromedio.Location = new System.Drawing.Point(135, 34);
+            this.lblPromedio.Name = "lblPromedio";
+            this.lblPromedio.Size = new System.Drawing.Size(81, 13);
+            this.lblPromedio.TabIndex = 18;
+            this.lblPromedio.Text = "resultado Grasa";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(134, 12);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Promedio Grasa";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -301,34 +331,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label7
+            // DELETE
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(134, 12);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Promedio Grasa";
-            // 
-            // lblPromedio
-            // 
-            this.lblPromedio.AutoSize = true;
-            this.lblPromedio.Location = new System.Drawing.Point(135, 34);
-            this.lblPromedio.Name = "lblPromedio";
-            this.lblPromedio.Size = new System.Drawing.Size(81, 13);
-            this.lblPromedio.TabIndex = 18;
-            this.lblPromedio.Text = "resultado Grasa";
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(0, 86);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(915, 287);
-            this.dataGridView4.TabIndex = 19;
+            this.DELETE.Location = new System.Drawing.Point(346, 131);
+            this.DELETE.Name = "DELETE";
+            this.DELETE.Size = new System.Drawing.Size(75, 23);
+            this.DELETE.TabIndex = 15;
+            this.DELETE.Text = "DELETE";
+            this.DELETE.UseVisualStyleBackColor = true;
+            this.DELETE.Click += new System.EventHandler(this.DELETE_Click);
             // 
             // Form1
             // 
@@ -336,6 +347,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(974, 737);
+            this.Controls.Add(this.DELETE);
             this.Controls.Add(this.ControlGimnasio);
             this.Controls.Add(this.Actualizar);
             this.Controls.Add(this.label5);
@@ -396,6 +408,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.Label lblPromedio;
+        private System.Windows.Forms.Button DELETE;
     }
 }
 

@@ -16,6 +16,7 @@ namespace Trabajo3.Data
         private string ConnectionString = ConfigurationManager.ConnectionStrings["MiDB"].ConnectionString;
 
 
+       
         public decimal ObtenerPromedioGrasa(int idRutina)
         {
             using (SqlConnection cn = new SqlConnection(ConnectionString))

@@ -78,9 +78,17 @@ namespace Trabajo3
         
         private void button2_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtId.Text))
+            {
+                MessageBox.Show("Ingresa un IdCliente válido", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             repo.EjecutarSP("SP_Insert", ObtenerDatosFormulario());
             tablas();
         }
+        
 
         private void Actualizar_Click(object sender, EventArgs e)
         {
@@ -107,12 +115,18 @@ namespace Trabajo3
         {
             int idRutina = int.Parse(txtR.Text);
 
-            // Escalar
+            
             decimal promedio = repo.ObtenerPromedioGrasa(idRutina);
             lblPromedio.Text = promedio.ToString("F2");
 
-            // Tabla
+          
             dataGridView4.DataSource = repo.ObtenerClientesPorRutina(idRutina);
+        }
+
+        private void DELETE_Click(object sender, EventArgs e)
+        {
+            repo.EjecutarSP("SP_Delete", new Dictionary<string, object>{{ "@IdCliente", txtId.Text } });
+            tablas();
         }
     }
 }
